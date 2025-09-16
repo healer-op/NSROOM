@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Room Availability from PDFs</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+
+        * {
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            background: url(https://i.pinimg.com/1200x/c6/8f/c4/c68fc494ffb9e31ecdc7ca5caf326356.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+
+            /* Centering */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* full screen height */
+            margin: 0;
+            /* remove default margin */
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(0, 0, 0, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+                inset 0 0 20px 10px rgb(0, 0, 0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(0, 0, 0, 0.8),
+                    transparent);
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.8),
+                    transparent,
+                    rgba(255, 255, 255, 0.3));
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.719);
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+        }
+
+        label {
+            color: white;
+            display: block;
+            margin-top: 10px;
+        }
+
+        select,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(0.9);
+            border-color: #888;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fafafa;
+            border-radius: 5px;
+        }
+
+        .free {
+            color: green;
+            font-weight: bold;
+        }
+
+        .occupied {
+            color: red;
+        }
+
+        .details {
+            font-size: 0.9em;
+            color: #333;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container glass-card">
+        <h2>Check Free Rooms</h2>
+
+        <label for="pdfs"><b>Upload Room PDFs:</b></label>
+        <input type="file" id="pdfs" multiple accept="application/pdf">
+
+        <label for="day"><b>Select Day:</b></label>
+        <select id="day">
+            <option value="Mon">Monday</option>
+            <option value="Tue">Tuesday</option>
+            <option value="Wed">Wednesday</option>
+            <option value="Thu">Thursday</option>
+            <option value="Fri">Friday</option>
+        </select>
+
+        <label for="slot"><b>Select Slot:</b></label>
+        <select id="slot"></select>
+
+        <button onclick="processPDFs()"><b>Check Availability</b></button>
+        <button onclick="location.reload();"><b>Refresh</b></button>
+        <br>
+        <hr>
+        <span><a href="https://cloud.healer.eu.org/APJ/APJ.zip">Download APJ</a></span>
+        <hr>
+        <br>
+
+        <div id="result"></div>
+        <br>
+        <br>
+        <center><div class="healer" style="color:white"><b>Made by <a href="https://github.com/healer-op">Aditya</a></b></div></center>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
