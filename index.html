@@ -92,7 +92,8 @@
         }
 
         select,
-        button {
+        button,
+        #slot-checkboxes {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -128,6 +129,25 @@
             color: #333;
             margin-left: 10px;
         }
+
+        #slot-checkboxes {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-around;
+        }
+
+        #slot-checkboxes label {
+            display: inline-flex;
+            align-items: center;
+            color: #333;
+            font-size: 0.9em;
+            margin: 0;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -147,21 +167,23 @@
             <option value="Fri">Friday</option>
         </select>
 
-        <label for="slot"><b>Select Slot:</b></label>
-        <select id="slot"></select>
+        <label><b>Select Slots:</b></label>
+        <div id="slot-checkboxes"></div>
 
         <button onclick="processPDFs()"><b>Check Availability</b></button>
         <button onclick="location.reload();"><b>Refresh</b></button>
         <br>
         <hr>
-        <span><a href="https://cloud.healer.eu.org/APJ/APJ.zip">Download APJ</a></span>
+        <span><a href="https://cloud.healer.eu.org/APJ/RoomPdfAditya.zip">Download PDF.zip</a></span>
         <hr>
         <br>
 
         <div id="result"></div>
         <br>
         <br>
-        <center><div class="healer" style="color:white"><b>Made by <a href="https://github.com/healer-op" target="_blank">Aditya</a></b></div></center>
+        <center>
+            <div class="healer" style="color:white"><b>Made by <a href="https://github.com/healer-op" target="_blank">Aditya</a></b></div>
+        </center>
     </div>
 
     <script src="./script.js"></script>
